@@ -5,7 +5,7 @@ resource "aws_vpc" "primary_vpc" {
   enable_dns_support = true
 
   tags = {
-    Name = "primary-VPC-${var.primary}"
+    Name = "primary-VPC-${var.primary_region}"
   }
 }
 
@@ -16,7 +16,7 @@ resource "aws_vpc" "secondary_vpc" {
   enable_dns_support = true
 
   tags = {
-    Name = "secondary-VPC-${var.secondary}"
+    Name = "secondary-VPC-${var.secondary_region}"
   }
 }
 
