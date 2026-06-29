@@ -11,10 +11,12 @@ default = {
 
  variable "primary_region" {
    default = "us-east-1"
+type = string
  }
 
 variable "secondary_region"{
     default = "us-west-1"
+type = string
 }
 variable "primary_vpc_cidr" {
     default = "10.0.0.0/16"
