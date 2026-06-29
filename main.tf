@@ -28,7 +28,7 @@ resource "aws_subnet" "primary_subnet" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name        = "Primary-Subnet-${var.primary}"
+    Name        = "Primary-Subnet-${var.primary_region}"
     Environment = "Demo"
   }
 }
@@ -40,7 +40,7 @@ resource "aws_subnet" "secondary_subnet" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name        = "secondary-Subnet-${var.secondary}"
+    Name        = "secondary-Subnet-${var.secondary_region}"
     Environment = "Demo"
   }
 }
@@ -51,7 +51,7 @@ vpc_id = aws_vpc.primary_vpc.id
 
 
  tags = {
-    Name = "primary-IGW-${var.primary}"
+    Name = "primary-IGW-${var.primary_region}"
     Environment = "Demo" 
   }
 }
@@ -62,7 +62,7 @@ vpc_id = aws_vpc.secondary_vpc.id
 
 
  tags = {
-    Name = "secondary-IGW-${var.secondary}"
+    Name = "secondary-IGW-${var.secondary_region}"
     Environment = "Demo" 
   }
 }
@@ -109,7 +109,7 @@ resource "aws_vpc_peering_connection" "primary_to_secondary" {
   provider    = aws.primary
   vpc_id      = aws_vpc.primary_vpc.id
   peer_vpc_id = aws_vpc.secondary_vpc.id
-  peer_region = var.secondary
+  peer_region = var.secondary_region
   auto_accept = false
 
   tags = {
@@ -250,7 +250,7 @@ resource "aws_instance" "primary_instance" {
   tags = {
     Name        = "Primary-VPC-Instance"
     Environment = "Demo"
-    Region      = var.primary
+    Region      = var.primary_region
   }
 
   depends_on = [aws_vpc_peering_connection_accepter.secondary_accepter]
@@ -270,7 +270,7 @@ resource "aws_instance" "secondary_instance" {
   tags = {
     Name        = "Secondary-VPC-Instance"
     Environment = "Demo"
-    Region      = var.secondary
+    Region      = var.secondary_region
   }
 
   depends_on = [aws_vpc_peering_connection_accepter.secondary_accepter]
