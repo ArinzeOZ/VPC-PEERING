@@ -9,11 +9,11 @@ default = {
 }
 }
 
- variable "primary" {
+ variable "primary_region" {
    default = "us-east-1"
  }
 
-variable "secondary"{
+variable "secondary_region"{
     default = "us-west-1"
 }
 variable "primary_vpc_cidr" {
